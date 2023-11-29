@@ -3,6 +3,7 @@ Akond Rahman
 May 03, 2021 
 Code to detect security anti-patterns 
 '''
+import logger
 import parser 
 import constants 
 import graphtaint 
@@ -68,6 +69,7 @@ def getYAMLFiles(path_to_dir):
            if(os.path.exists(full_p_file)):
              if (full_p_file.endswith( constants.YML_EXTENSION  )  or full_p_file.endswith( constants.YAML_EXTENSION  )  ):
                valid_.append(full_p_file)
+    logger.info("Valid YAML files: %s", valid_)
     return valid_ 
 
 def isValidUserName(uName): 
@@ -129,6 +131,8 @@ def scanUserName(k_ , val_lis ):
             if (checkIfValidSecret( val_ ) ): 
                 # print(val_) 
                 hard_coded_unames.append( val_ )
+    
+    logger.info("Hard coded usernames: %s", hard_coded_unames)
     return hard_coded_unames
 
 def scanPasswords(k_ , val_lis ):
@@ -139,6 +143,8 @@ def scanPasswords(k_ , val_lis ):
         for val_ in val_lis:
             if (checkIfValidSecret( val_ ) ): 
                 hard_coded_pwds.append( val_ )
+    
+    logger.info("Hard coded passwords: %s", hard_coded_pwds)
     return hard_coded_pwds
 
 
@@ -735,7 +741,6 @@ def runScanner(dir2scan):
         sarif_json = to_json(sarif_log)
         #print(sarif_json)       
 
-
     return all_content, sarif_json
 
 
@@ -1005,6 +1010,7 @@ def scanForUnconfinedSeccomp(path_script ):
     return dic  
 
 if __name__ == '__main__':
+    logger = logger.createLogger()
     #provide directory to scan
     dir2scan = r'C:\Users\..'
     a,b = runScanner(dir2scan)

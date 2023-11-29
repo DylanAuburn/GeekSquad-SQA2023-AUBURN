@@ -6,6 +6,7 @@ Source Code to Run Tool on All Kubernetes Manifests
 import scanner 
 import pandas as pd 
 import constants
+import logger
 
 def getCountFromAnalysis(ls_):
     list2ret           = []
@@ -43,6 +44,7 @@ def getCountFromAnalysis(ls_):
         helm_flag      = tup_[22]
 
         list2ret.append(  ( dir_name, script_name, within_sec_cnt, len(taint_secret), len(privilege_dic), len(http_dict), len(secuContextDic), len(nSpaceDict), len(absentResoDict), len(rollUpdateDic), len(netPolicyDict), len(pidfDict), len(ipcDict), len(dockersockDic), len(hostNetDict), len(cap_sys_dic), len(host_alias_dic), len(allow_priv_dic), len(unconfined_dic), len(cap_module_dic) , k8s_flag, helm_flag  )  )
+        logger.info("List to Return: %s", list2ret)
     return list2ret
 
 
@@ -53,7 +55,8 @@ def main(directory: Path = typer.Argument(..., exists=True, help="Absolute path 
 
     """
     content_as_ls, sarif_json   = scanner.runScanner( directory )
-    
+    logger.info("Scanner run results: %s", content_as_ls)
+
     with open("SLIKUBE.sarif", "w") as f:
       f.write(sarif_json)
 
@@ -79,6 +82,8 @@ if __name__ == '__main__':
     # OUTPUT_FILE_CSV = '/Users/arahman/Documents/OneDriveWingUp/OneDrive-TennesseeTechUniversity/Research/Kubernetes/StaticTaint/data/V16_BRINTO_OUTPUT.csv'
 
     # take sarif_json from scanner
+    logger = logger.createLogger()
+    logger.info("Logger Created..")
     main()
 
 
