@@ -6,4 +6,4 @@ def createLogger() -> logging.Logger:
     
     formatStr = '%(asctime)s %(message)s'
     logging.basicConfig(format=formatStr, filename=filename, level=logging.info)
-    return logging.Logger('KubeSec Main Logger')
+    return logging.Logger('KubeSec Logger')
