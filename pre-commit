@@ -8,7 +8,7 @@
 # To enable this hook, rename this file to "pre-commit".
 
 echo "Hook Start"
-bandit -r \GeekSquad-SQA2023-AUBURN
+bandit -f csv -o banditReport.csv -r \GeekSquad-SQA2023-AUBURN
 echo "Hook End"
 
 #if git rev-parse --verify HEAD >/dev/null 2>&1
