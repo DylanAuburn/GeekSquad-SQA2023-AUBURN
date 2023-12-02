@@ -9,3 +9,6 @@ Wilson Sinclair:
 
 Shrey Patel:  
   For my contribution, I provided script comprises two modules: fuzz.py and example_module.py. The latter defines five functions, including mathematical operations and string manipulations, each with specific error-handling logic. In fuzz.py, the hypothesis library is employed for property-based testing. Five test functions are defined, each targeting one of the functions in example_module.py. These tests generate random inputs to assess the functions' robustness and error handling. If an exception is raised during the function execution, a bug is identified and a corresponding message is printed. The __main__ block orchestrates the execution of all test functions, enabling automated testing of the functions in example_module.py with diverse inputs, revealing potential bugs in their implementation.
+  
+  Jay Scott:
+  I worked with Shrey to test and verify the functionality of the previously described fuzz.py module.
